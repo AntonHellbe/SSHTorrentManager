@@ -1,0 +1,4 @@
+
+authDetails = {
+    "password" : "fabrik22"
+}
