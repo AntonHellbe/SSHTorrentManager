@@ -54,9 +54,10 @@ class MyWebApi():
             "method": "webapi.add_torrent",
             "params": [magnet_link]
         }
-
+        print(payload)
         response = self.session.post(MyWebApi.WEB_API_URL, data=json.dumps(payload))
         if response.status_code == 200:
+            print(response.text)
             return True, ""
         
         return False, response.text
