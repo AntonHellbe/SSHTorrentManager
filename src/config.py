@@ -1,4 +1,4 @@
 
 authDetails = {
-    "password" : ""
+    "password" : "fabrik22"
 }

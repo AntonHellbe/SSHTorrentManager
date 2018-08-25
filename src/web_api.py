@@ -4,14 +4,15 @@ from config import authDetails
 from torrent_data import Torrent
 
 class MyWebApi():
-    WEB_API_URL = "http://localhost:8112/json"
+    
+    WEB_API_URL = "http://127.0.0.1:8112/json"
     headers_to_use = {
         'content-type': 'application/json',
         'accept':'application/json'
     }
 
-    def __init__(self, URL):
-        self.url = URL
+    def __init__(self):
+        #self.url = URL
         self.session = requests.session()
         self.session.headers = MyWebApi.headers_to_use
         self.downloading_torrents = []
@@ -25,7 +26,7 @@ class MyWebApi():
 
         response = self.session.post(MyWebApi.WEB_API_URL, data=json.dumps(payload))
         self.session.cookies = response.cookies
-        print(self.session.cookies)
+        
 
     def list_all_torrents(self, filter = None):
         payload = {

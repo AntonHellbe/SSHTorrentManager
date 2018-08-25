@@ -4,10 +4,12 @@ import urllib
 import math
 from torrent_data import Torrent
 
-SEARCH_URL = "https://thepiratebay.org/search/"
+
 
 
 class Piratebay():
+
+    SEARCH_URL = "https://thepiratebay.org/search/"
 
     def __init__(self, quality, seeder_lim):
         self.quality = quality
@@ -17,9 +19,8 @@ class Piratebay():
     def search_for_torrent(self, search_string):
 
         encoded_string = urllib.parse.quote(search_string)
-        search_content = requests.get(SEARCH_URL + encoded_string)
+        search_content = requests.get(Piratebay.SEARCH_URL + encoded_string)
         soup_content = BeautifulSoup(search_content.content, "html.parser")
-        #print(soup_content)
         names = soup_content.find_all(class_ = 'detName')
         seeders_and_leechers = soup_content.find_all(align = "right")
         links = soup_content.find_all(title="Download this torrent using magnet")
@@ -37,9 +38,9 @@ class Piratebay():
             torrent = Torrent(all_torrent_names[i], all_torrent_seeders_and_leechers[i][0], 
             all_torrent_seeders_and_leechers[i][1], all_links[i])
             self.search_torrents.append(torrent)
+        
+        print("Found {} torrents".format(min_len))
 
-        #for torrent in self.search_torrents:
-            #print(torrent.describe())
         
         
 
@@ -63,7 +64,6 @@ class Piratebay():
         for link in all_links:
             all_magnet_links.append(link["href"])
         
-        #print(all_magnet_links)
         return all_magnet_links
     
     def find_best_torrent(self):
