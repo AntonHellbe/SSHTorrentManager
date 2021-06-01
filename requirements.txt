@@ -27,7 +27,7 @@ setproctitle==1.1.10
 six==1.11.0
 systemd-python==234
 team==1.0
-urllib3==1.23
+urllib3==1.26.5
 vboxapi==1.0
 virtualenv==16.0.0
 webencodings==0.5.1
